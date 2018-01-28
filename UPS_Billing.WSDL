@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="UPS_Retorno_Frete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ParametroFrete" type="tns:BillingVO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BillingVO">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="nr_peso" type="s:float" />
+          <s:element minOccurs="0" maxOccurs="1" name="nr_conta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nr_cep_origem" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nr_cep_destino" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="vl_valor_mercadoria" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="nr_quantidade_pacotes" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="nm_cidade_origem" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nm_cidade_destino" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ds_dimencional" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="autenticacao" type="tns:BillingAutenticacao" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BillingAutenticacao">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="nr_conta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nr_chaveAcesso" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UPS_Retorno_FreteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPS_Retorno_FreteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetornoFrete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nr_peso" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nr_conta" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nr_cep_origem" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nr_cep_destino" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="vl_valor_mercadoria" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nr_quantidade_pacotes" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nm_cidade_origem" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nm_cidade_destino" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetornoFreteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RetornoFreteResult" type="tns:ArrayOfBillingRetornoVO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBillingRetornoVO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BillingRetornoVO" nillable="true" type="tns:BillingRetornoVO" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BillingRetornoVO">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="vl_custoReais" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="vl_Desconto" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="vl_Final" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UserContainer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="User" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserContainerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserContainerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PesquisaContainer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nr_container" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PesquisaContainerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PesquisaContainerResult" type="tns:ArrayOfSeguranca_entrada_saida_containerVO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSeguranca_entrada_saida_containerVO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="seguranca_entrada_saida_containerVO" nillable="true" type="tns:seguranca_entrada_saida_containerVO" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="seguranca_entrada_saida_containerVO">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id_seguranca_entrada_saida_container" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="id_ups_voo" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="nm_ups_voo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nr_container" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="dt_chegada_previsao" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="dt_entrada" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dt_saida" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ob_imagem_container_entrada" />
+          <s:element minOccurs="0" maxOccurs="1" name="ob_imagem_container_saida" />
+          <s:element minOccurs="0" maxOccurs="1" name="id_usuario_alteracao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="id_usuario_alteracao_entrada" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="id_usuario_alteracao_saida" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="dt_ultima_alteracao" nillable="true" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RetornaDadosRemessa">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AWBNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetornaDadosRemessaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RetornaDadosRemessaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CteAutomacao">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Chave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="peso" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CteAutomacaoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CteAutomacaoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PesquisaCteImpressao">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="idUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nrCnpj" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PesquisaCteImpressaoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PesquisaCteImpressaoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BaixaCteImpressao">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idXml" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BaixaCteImpressaoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BaixaCteImpressaoResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FTPArquivoReceitaFederal">
+        <s:complexType />
+      </s:element>
+      <s:complexType name="ftp_ArquivoVO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="nm_arquivo" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFtp_ArquivoVO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ftp_ArquivoVO" nillable="true" type="tns:ftp_ArquivoVO" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FTPArquivoReceitaFederalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FTPArquivoReceitaFederalResult" type="tns:ArrayOfFtp_ArquivoVO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="UPS_Retorno_FreteSoapIn">
+    <wsdl:part name="parameters" element="tns:UPS_Retorno_Frete" />
+  </wsdl:message>
+  <wsdl:message name="UPS_Retorno_FreteSoapOut">
+    <wsdl:part name="parameters" element="tns:UPS_Retorno_FreteResponse" />
+  </wsdl:message>
+  <wsdl:message name="RetornoFreteSoapIn">
+    <wsdl:part name="parameters" element="tns:RetornoFrete" />
+  </wsdl:message>
+  <wsdl:message name="RetornoFreteSoapOut">
+    <wsdl:part name="parameters" element="tns:RetornoFreteResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserContainerSoapIn">
+    <wsdl:part name="parameters" element="tns:UserContainer" />
+  </wsdl:message>
+  <wsdl:message name="UserContainerSoapOut">
+    <wsdl:part name="parameters" element="tns:UserContainerResponse" />
+  </wsdl:message>
+  <wsdl:message name="PesquisaContainerSoapIn">
+    <wsdl:part name="parameters" element="tns:PesquisaContainer" />
+  </wsdl:message>
+  <wsdl:message name="PesquisaContainerSoapOut">
+    <wsdl:part name="parameters" element="tns:PesquisaContainerResponse" />
+  </wsdl:message>
+  <wsdl:message name="RetornaDadosRemessaSoapIn">
+    <wsdl:part name="parameters" element="tns:RetornaDadosRemessa" />
+  </wsdl:message>
+  <wsdl:message name="RetornaDadosRemessaSoapOut">
+    <wsdl:part name="parameters" element="tns:RetornaDadosRemessaResponse" />
+  </wsdl:message>
+  <wsdl:message name="CteAutomacaoSoapIn">
+    <wsdl:part name="parameters" element="tns:CteAutomacao" />
+  </wsdl:message>
+  <wsdl:message name="CteAutomacaoSoapOut">
+    <wsdl:part name="parameters" element="tns:CteAutomacaoResponse" />
+  </wsdl:message>
+  <wsdl:message name="PesquisaCteImpressaoSoapIn">
+    <wsdl:part name="parameters" element="tns:PesquisaCteImpressao" />
+  </wsdl:message>
+  <wsdl:message name="PesquisaCteImpressaoSoapOut">
+    <wsdl:part name="parameters" element="tns:PesquisaCteImpressaoResponse" />
+  </wsdl:message>
+  <wsdl:message name="BaixaCteImpressaoSoapIn">
+    <wsdl:part name="parameters" element="tns:BaixaCteImpressao" />
+  </wsdl:message>
+  <wsdl:message name="BaixaCteImpressaoSoapOut">
+    <wsdl:part name="parameters" element="tns:BaixaCteImpressaoResponse" />
+  </wsdl:message>
+  <wsdl:message name="FTPArquivoReceitaFederalSoapIn">
+    <wsdl:part name="parameters" element="tns:FTPArquivoReceitaFederal" />
+  </wsdl:message>
+  <wsdl:message name="FTPArquivoReceitaFederalSoapOut">
+    <wsdl:part name="parameters" element="tns:FTPArquivoReceitaFederalResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Service1Soap">
+    <wsdl:operation name="UPS_Retorno_Frete">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">WebService Retorno Preço - Billing - Versão: 1.1.0</wsdl:documentation>
+      <wsdl:input message="tns:UPS_Retorno_FreteSoapIn" />
+      <wsdl:output message="tns:UPS_Retorno_FreteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RetornoFrete">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">WebService Retorno Android - Não utilizar</wsdl:documentation>
+      <wsdl:input message="tns:RetornoFreteSoapIn" />
+      <wsdl:output message="tns:RetornoFreteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserContainer">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">WebService Pesquisa Usuário Liberado Módulo Container</wsdl:documentation>
+      <wsdl:input message="tns:UserContainerSoapIn" />
+      <wsdl:output message="tns:UserContainerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PesquisaContainer">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">WebService Pesquisa Container Registrado UPS</wsdl:documentation>
+      <wsdl:input message="tns:PesquisaContainerSoapIn" />
+      <wsdl:output message="tns:PesquisaContainerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RetornaDadosRemessa">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">WebService Retorna Dados Remessas UPS</wsdl:documentation>
+      <wsdl:input message="tns:RetornaDadosRemessaSoapIn" />
+      <wsdl:output message="tns:RetornaDadosRemessaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CteAutomacao">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">WebService Automação Cte</wsdl:documentation>
+      <wsdl:input message="tns:CteAutomacaoSoapIn" />
+      <wsdl:output message="tns:CteAutomacaoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PesquisaCteImpressao">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">WebService Retorno Cte automação Impressão</wsdl:documentation>
+      <wsdl:input message="tns:PesquisaCteImpressaoSoapIn" />
+      <wsdl:output message="tns:PesquisaCteImpressaoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BaixaCteImpressao">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">WebService Baixa Cte automação Impressão</wsdl:documentation>
+      <wsdl:input message="tns:BaixaCteImpressaoSoapIn" />
+      <wsdl:output message="tns:BaixaCteImpressaoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FTPArquivoReceitaFederal">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">WebService Retorna Arquivo FTP - Receita Federal</wsdl:documentation>
+      <wsdl:input message="tns:FTPArquivoReceitaFederalSoapIn" />
+      <wsdl:output message="tns:FTPArquivoReceitaFederalSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Service1Soap" type="tns:Service1Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UPS_Retorno_Frete">
+      <soap:operation soapAction="http://tempuri.org/UPS_Retorno_Frete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetornoFrete">
+      <soap:operation soapAction="http://tempuri.org/RetornoFrete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserContainer">
+      <soap:operation soapAction="http://tempuri.org/UserContainer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PesquisaContainer">
+      <soap:operation soapAction="http://tempuri.org/PesquisaContainer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetornaDadosRemessa">
+      <soap:operation soapAction="http://tempuri.org/RetornaDadosRemessa" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CteAutomacao">
+      <soap:operation soapAction="http://tempuri.org/CteAutomacao" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PesquisaCteImpressao">
+      <soap:operation soapAction="http://tempuri.org/PesquisaCteImpressao" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BaixaCteImpressao">
+      <soap:operation soapAction="http://tempuri.org/BaixaCteImpressao" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FTPArquivoReceitaFederal">
+      <soap:operation soapAction="http://tempuri.org/FTPArquivoReceitaFederal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Service1Soap12" type="tns:Service1Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UPS_Retorno_Frete">
+      <soap12:operation soapAction="http://tempuri.org/UPS_Retorno_Frete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetornoFrete">
+      <soap12:operation soapAction="http://tempuri.org/RetornoFrete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserContainer">
+      <soap12:operation soapAction="http://tempuri.org/UserContainer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PesquisaContainer">
+      <soap12:operation soapAction="http://tempuri.org/PesquisaContainer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetornaDadosRemessa">
+      <soap12:operation soapAction="http://tempuri.org/RetornaDadosRemessa" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CteAutomacao">
+      <soap12:operation soapAction="http://tempuri.org/CteAutomacao" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PesquisaCteImpressao">
+      <soap12:operation soapAction="http://tempuri.org/PesquisaCteImpressao" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BaixaCteImpressao">
+      <soap12:operation soapAction="http://tempuri.org/BaixaCteImpressao" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FTPArquivoReceitaFederal">
+      <soap12:operation soapAction="http://tempuri.org/FTPArquivoReceitaFederal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="Service1Soap" binding="tns:Service1Soap">
+      <soap:address location="http://189.57.214.75:8081/UPS_Billing.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Service1Soap12" binding="tns:Service1Soap12">
+      <soap12:address location="http://189.57.214.75:8081/UPS_Billing.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

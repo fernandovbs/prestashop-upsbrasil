@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<name>foxiups</name>
+	<displayName><![CDATA[Ups Brasil]]></displayName>
+	<version><![CDATA[1.6.1]]></version>
+	<description><![CDATA[Exibe custo de envio via Ups.]]></description>
+	<author><![CDATA[Fernando Souza]]></author>
+	<tab><![CDATA[shipping_logistics]]></tab>
+	<is_configurable>0</is_configurable>
+	<need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+</module>
