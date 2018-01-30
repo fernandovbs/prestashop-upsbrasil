@@ -157,7 +157,7 @@ class UpsBrasil extends CarrierModule
 		//Configuration	
 		try {
 
-			$wsdl = "UPS_Billing.WSDL";
+			$wsdl = "/var/www/html/modules/UPS_Billing.WSDL";
 			$operation = "UPS_Retorno_Frete";
 			$endpointurl = ('http://189.57.214.75:8081/UPS_Billing.asmx?wsdl');
 
@@ -297,7 +297,7 @@ class UpsBrasil extends CarrierModule
 		$access = "TNTACCESSKEY";
 		$userid = "USER";
 		$passwd = "PASSWORD";
-		$wsdl = "TNTWS.wsdl";
+		$wsdl = "/var/www/html/modules/TNTWS.wsdl";
 		$operation = "ProcessTimeInTransit";
 		$endpointurl = 'https://onlinetools.ups.com/webservices/TimeInTransit';
 		
