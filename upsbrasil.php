@@ -165,6 +165,7 @@ class UpsBrasil extends CarrierModule
 			(
 				 'soap_version' => 'SOAP_1_1',  // use soap 1.1 client
 				 'trace' => 1,
+				 'exceptions' => true,
 				 'cache_wsdl' => WSDL_CACHE_NONE,
 			);
 		
@@ -304,6 +305,7 @@ class UpsBrasil extends CarrierModule
 			$mode = [
  				'soap_version' => 'SOAP_1_1',  // use soap 1.1 client
 				'trace' => 1,
+				'exceptions' => true,				
 				'cache_wsdl' => WSDL_CACHE_NONE,
 			];
 	  
