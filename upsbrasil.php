@@ -164,10 +164,11 @@ class UpsBrasil extends CarrierModule
 			$mode = array
 			(
 				 'soap_version' => 'SOAP_1_1',  // use soap 1.1 client
-				 'trace' => 1
+				 'trace' => 1,
+				 'cache_wsdl' => WSDL_CACHE_NONE,
 			);
 		
-			// initialize soap client ReferÃªncia de objeto nÃ£o definida para uma instÃ¢ncia de um objeto." string(0) "" Erro de chamada webservice UPS
+			// initialize soap client
 			$client = new SoapClient($wsdl , $mode);
 		
 			//set endpoint url
@@ -302,7 +303,8 @@ class UpsBrasil extends CarrierModule
 		try {
 			$mode = [
  				'soap_version' => 'SOAP_1_1',  // use soap 1.1 client
-			    'trace' => 1,
+				'trace' => 1,
+				'cache_wsdl' => WSDL_CACHE_NONE,
 			];
 	  
 			// initialize soap client
