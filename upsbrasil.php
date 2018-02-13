@@ -2,6 +2,21 @@
 class UpsBrasil extends CarrierModule
 {
 	const PREFIX = 'ups_brasil';
+	const SETTINGS = [
+		'ups' => [
+			'nr_conta' => '',
+			'nr_chaveAcesso' => '',
+			'tnt_key' => '',
+			'tnt_user' => '',
+			'tnt_pass' => '',
+		],
+		'address' => [
+			'uf' => '',
+			'cep' => '',
+			'city' => '',
+			'country' => 'BR'//Always BR
+		],
+	];
 
 	//For control change of the carrier's ID (id_carrier), the module must use the updateCarrier hook.	
 	protected $_hooks = ['actionCarrierUpdate'];
@@ -273,17 +288,17 @@ class UpsBrasil extends CarrierModule
 		$aut = [];		
 		
 		//set parameters for soap request
-		$aut['nr_conta'] = 'YOURUPSACCOUNT';		
-		$aut['nr_chaveAcesso'] = 'ACCESKEY';
+		$aut['nr_conta'] = self::SETTINGS['ups']['nr_conta'];		
+		$aut['nr_chaveAcesso'] = self::SETTINGS['ups']['nr_chaveAcesso'];
 
 		$params['autenticacao'] = $aut;
 		$params['nr_peso'] = $pesoPedido;
-		$params['nr_conta'] = 'YOURUPSACCOUNT';
-		$params['nr_cep_origem'] = 'YOURCEP';
+		$params['nr_conta'] = self::SETTINGS['ups']['nr_conta'];
+		$params['nr_cep_origem'] = self::SETTINGS['address']['cep'];
 		$params['nr_cep_destino'] = $cepDestino;
 		$params['nr_quantidade_pacotes'] = '1';
 		$params['vl_valor_mercadoria'] = $precoPedido;
-		$params['nm_cidade_origem'] = 'CITY';
+		$params['nm_cidade_origem'] = self::SETTINGS['address']['city'];
 		$params['nm_cidade_destino'] = $addressCustomer->city;		
 		$params['ds_dimensional'] = $larguraPedido.'/'.$alturaPedido.'/'.$comprimentoPedido;
 
@@ -294,9 +309,6 @@ class UpsBrasil extends CarrierModule
 
 	function getPrazo($params)
 	{
-		$access = "TNTACCESSKEY";
-		$userid = "USER";
-		$passwd = "PASSWORD";
 		$wsdl = _PS_MODULE_DIR_."/upsbrasil/TNTWS.wsdl";
 		$operation = "ProcessTimeInTransit";
 		$endpointurl = 'https://onlinetools.ups.com/webservices/TimeInTransit';
@@ -316,14 +328,14 @@ class UpsBrasil extends CarrierModule
 			$client->__setLocation($endpointurl);
 	  
 			//create soap header
-			$usernameToken['Username'] = $userid;
-			$usernameToken['Password'] = $passwd;
-			$upss['UsernameToken'] = $usernameToken;
+			$usernameToken['Username'] = self::SETTINGSSETTINGS['ups']['tnt_user'];
+			$usernameToken['Password'] = self::SETTINGS['ups']['tnt_pass'];
+			$upsService['UsernameToken'] = $usernameToken;
 
-			$serviceAccessLicense['AccessLicenseNumber'] = $access;
-			$upss['ServiceAccessToken'] = $serviceAccessLicense;
+			$serviceAccessLicense['AccessLicenseNumber'] = self::SETTINGS['ups']['tnt_key'];
+			$upsService['ServiceAccessToken'] = $serviceAccessLicense;
 		
-			$header = new SoapHeader('http://www.ups.com/XMLSchema/XOLTWS/UPSS/v1.0', 'UPSSecurity', $upss);
+			$header = new SoapHeader('http://www.ups.com/XMLSchema/XOLTWS/UPSS/v1.0', 'UPSSecurity', $upsService);
 			$client->__setSoapHeaders($header);
 	  
 		    if ($requestData = $this->processaPrazoData($params)) {
@@ -382,10 +394,10 @@ class UpsBrasil extends CarrierModule
 		$shipment['Request'] = $option;
   
 		//From address
-		$address['City'] = 'CITY';
-		$address['StateProvinceCode'] = 'UF';
-		$address['PostalCode'] = 'CEP';
-		$address['CountryCode'] = 'BR';
+		$address['City'] = self::SETTINGS['address']['city'];
+		$address['StateProvinceCode'] = self::SETTINGS['address']['uf'];
+		$address['PostalCode'] = self::SETTINGS['address']['cep'];
+		$address['CountryCode'] = self::SETTINGS['address']['country'];
 		$shipper['Address'] = $address;
 		
 		$shipment['ShipFrom'] = $shipper;
