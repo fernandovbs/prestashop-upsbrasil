@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
-	<name>foxiups</name>
+	<name>upsbrasil</name>
 	<displayName><![CDATA[Ups Brasil]]></displayName>
 	<version><![CDATA[1.6.1]]></version>
 	<description><![CDATA[Exibe custo de envio via Ups.]]></description>
